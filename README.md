@@ -1,2 +1,2 @@
 # xai-classification
-eXplainable AI for Random Forests and eXtreme Gradient Boosting classification for lateral spreading datasets
+eXplainable AI for eXtreme Gradient Boosting classification of lateral spreading datasets
