@@ -6,6 +6,14 @@ import pandas as pd
 from scipy import stats
 import seaborn as sns
 
+# Distribution of data
+def distribution(X):
+  n_columns = len(X.columns)
+  fig, axes = plt.subplots(1,n_columns,figsize=(20,2),constrained_layout=True)
+  for name, axis in zip(X.columns, axes):
+    ax = sns.kdeplot(data=X, x=name, ax=axis, fill=True).set(xlim=(0, np.max(X[name])))
+  fig.show()
+
 # print the percentile of feature compared to a specific a dataset
 def percentile_score(shap_value,X):
   df = pd.DataFrame(columns=X.columns)
@@ -16,7 +24,9 @@ def percentile_score(shap_value,X):
     ax = sns.kdeplot(data=X, x=name, ax=axis)
     x, y = ax.lines[0].get_data()
     width = (np.max(x) - np.min(x))/100
-    ax.bar(value,y[x < value], width=width,color='r')
+    ax.bar(value, np.interp(value, x, y), width=width,color='r')
+    ax.fill_between(x[x < value], y[x < value], alpha=0.5)
+    plt.xlim([np.min(x), np.max(x)])
     ax.text(0.8, 0.8, f'PCTL: {score:.2f}%\n{name}: {value:.2f}', color='black',
          horizontalalignment='center',
          verticalalignment='center',
@@ -40,14 +50,16 @@ def prob_barh(data):
 # plot prediction probability
 def pred_prob(data):
     with plt.style.context(('ggplot', 'seaborn')):
-        plt.figure(figsize=(8,6))
-        sns.displot(data, kde=False, 
-                    bins=int(25), color = 'blue',
-                    edgecolor='k')
+        sns.set(font_scale = 1.25)
+        sns.set_context(rc = {'patch.linewidth': 0.0})
+        #sns.set(rc={'axes.facecolor':'white', 'figure.facecolor':'lightgray'})
+        sns.displot(data, kde=True, 
+                        bins=int(25), color = 'gray', 
+                        edgecolor='k').set(xlim=(0,1))
+
         plt.xlabel('predictive probability')
         plt.ylabel('count')
         plt.show()
-
 
 
 # Function to Plot confusion matrix 
