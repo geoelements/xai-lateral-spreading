@@ -48,14 +48,19 @@ def prob_barh(data):
     return None
 
 # plot prediction probability
-def pred_prob(data):
+def pred_prob(data1, data2=None, labels=None):
     with plt.style.context(('ggplot', 'seaborn')):
         sns.set(font_scale = 1.25)
         sns.set_context(rc = {'patch.linewidth': 0.0})
         #sns.set(rc={'axes.facecolor':'white', 'figure.facecolor':'lightgray'})
-        sns.displot(data, kde=True, 
-                        bins=int(25), color = 'gray', 
+        sns.histplot(data1, kde=True, 
+                        bins=int(25), color = 'dimgray', 
                         edgecolor='k').set(xlim=(0,1))
+        sns.histplot(data2, kde=True, 
+                        bins=int(25), color = 'darkgray', 
+                        edgecolor='lightgray').set(xlim=(0,1))
+        if labels is not None:
+            plt.legend(labels)
 
         plt.xlabel('predictive probability')
         plt.ylabel('count')
