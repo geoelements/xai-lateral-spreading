@@ -27,3 +27,16 @@ Durante, M. G. and Rathje, E. (2022). Machine learning models for the evaluation
 Durante, M. G. and Rathje, E. M. (2021). An exploration of the use of machine learning to predict lateral spreading. Earthquake Spectra 37, 2288–2314. doi:10.1177/87552930211004613
 
 ## Citation
+```
+@software{krishna_kumar_2024_11003110,
+  author       = {Krishna Kumar and
+                  Cheng-Hsi Hsiao},
+  title        = {geoelements/xai-lateral-spreading: v1.0.1},
+  month        = apr,
+  year         = 2024,
+  publisher    = {Zenodo},
+  version      = {v1.0.1},
+  doi          = {10.5281/zenodo.11003110},
+  url          = {https://doi.org/10.5281/zenodo.11003110}
+}
+```
